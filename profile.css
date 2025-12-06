@@ -74,18 +74,6 @@ body {
     /* text-align: center; Remove default center to allow flex layouts */
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2.2rem;
-    margin-bottom: 40px;
-    color: #00aaff;
-}
-
-.dark-section {
-    background: #0f1626;
-}
-
-
 
 /* ===== PROJECTS & TEAM GRID ===== */
 .grid {

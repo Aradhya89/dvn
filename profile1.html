@@ -13,6 +13,45 @@
 </head>
 <body>
 
+
+    <!-- profile-data -->
+    <script type="module">
+        // importing the dictionary form profiledata.js
+        import { members } from "./profiledata.js";
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        
+        const member = members[id];
+
+
+        // fetch all the key and make id = member-key
+        Object.keys(member).forEach(key => {
+            const element = document.getElementById(`member-${key}`);
+
+            if (!element) return;
+            const links = ["github", "linkedin", "twitter", "website", "mail"];
+
+            if (key === "profilephoto") {
+                element.src = member[key];   // for image
+            } 
+            else if (key === "bio"){
+                element.innerHTML = member[key];
+            }
+            else if (links.includes(key)) {
+                element.href = member[key];   // for link>
+            } else {
+                if (member[key] === "" || member[key] == null) {
+                    element.style.display = "none"; // hide empty skill
+                } else {
+                    element.textContent = member[key]; // for text
+                }
+            }
+        });
+
+    </script>
+
+
+
     <!-- Navbar -->
     <header class="navbar">
         <div class="container nav-content">
@@ -28,48 +67,50 @@
             </nav>
         </div>
     </header>
+    
+
+
     <!-- Main Profile Content -->
     <div class="container">
 
-        
-        <!-- Breadcrumb Navigation -->
+
+        <!-- BACK BUTTON -->
         <div class="breadcrumb">
             <a href="index.html#team" class="back-link">
                 <i data-lucide="arrow-left" width="16"></i> Back to Team Directory
             </a>
         </div>
 
+
         <div class="profile-wrapper">
-            
             <!-- Left Sidebar: Photo & Key Info -->
             <aside class="profile-sidebar">
                 <div class="profile-card">
+
+                    <!-- PROFILE PHOTO -->
                     <div class="profile-avatar-container">
-
-
-                        <!-- Placeholder Image using gradient and initials if no image provided -->
-                        <img src="dvnimages/profile1.jpg" alt="member1" class="profile-avatar">
-                        <!-- <div class="profile-status" title="Online"></div> -->
+                        <img id = "member-profilephoto" alt="photo" class="profile-avatar">
                     </div>
                     
+                    <!-- name and role -->
+                    <h1 class="profile-name" id = "member-name"></h1>
+                    <p class="profile-role" id = "member-role"></p>
 
-                    <h1 class="profile-name">Sarah Jenks</h1>
-                    <p class="profile-role">Lead AI Engineer</p>
-
-                    
+                    <!-- joining date -->
                     <div style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0;">
                         <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 5px;">Member Since</p>
-                        <p style="color: white; font-weight: bold;">September 2023</p>
+                        <p style="color: white; font-weight: bold;" id = "member-joining"></p>
                     </div>
 
-                    <a href="mailto:sarah@dvnclub.com" class="btn-primary" style="width: 100%; margin-bottom: 15px;">Contact Me</a>
+                    <!-- mail id  -->
+                    <a  id = "member-mail" class="btn-primary" style="width: 100%; margin-bottom: 15px;">Contact Me</a>
 
-
+                    <!-- social media links button -->
                     <div class="social-buttons">
-                        <a href="#" class="social-btn"><i data-lucide="github"></i></a>
-                        <a href="#" class="social-btn"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="social-btn"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="social-btn"><i data-lucide="globe"></i></a>
+                        <a id="member-github" class="social-btn" target="_blank" ><i data-lucide="github"></i></a>
+                        <a id = "member-linkedin" class="social-btn" target="_blank" ><i data-lucide="linkedin"></i></a>
+                        <a id = "member-twitter" class="social-btn" target="_blank" ><i data-lucide="twitter"></i></a>
+                        <a id = "member-website" class="social-btn" target="_blank" ><i data-lucide="globe"></i></a>
                     </div>
 
                 </div>
@@ -81,13 +122,7 @@
                 <!-- About Section -->
                 <section class="content-block">
                     <h2 class="block-title">About Me</h2>
-                    <p class="bio-text">
-                        Hello! I'm a final year Computer Science student passionate about artificial intelligence and robotics. 
-                        Within the DVN Club, I lead the AI Automation team where we focus on creating intelligent agents for real-world problem solving.
-                        <br><br>
-                        My journey started with simple Python scripts, but I've since moved on to building complex neural networks and computer vision systems.
-                        I'm always looking for collaborators on open-source projects!
-                    </p>
+                    <p class="bio-text" id = "member-bio"></p>
                 </section>
 
 
@@ -96,14 +131,14 @@
                 <section class="content-block">
                     <h2 class="block-title">Technical Skills</h2>
                     <div class="skills-container">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">OpenCV</span>
-                        <span class="skill-tag">React.js</span>
-                        <span class="skill-tag">Robotics Operating System (ROS)</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Data Visualization</span>
-                        <span class="skill-tag">Project Management</span>
+                        <span id = "member-skill1" class="skill-tag"></span>
+                        <span id = "member-skill2" class="skill-tag"></span>
+                        <span id = "member-skill3" class="skill-tag"></span>
+                        <span id = "member-skill4" class="skill-tag"></span>
+                        <span id = "member-skill5" class="skill-tag"></span>
+                        <span id = "member-skill6" class="skill-tag"></span>
+                        <span id = "member-skill7" class="skill-tag"></span>
+                        <span id = "member-skill8" class="skill-tag"></span>
                     </div>
                 </section>
 
@@ -121,7 +156,7 @@
                             <p>Lead developer for the club's flagship automation bot designed to handle query responses efficiently.</p>
                             <div class="project-meta">
                                 <span><i data-lucide="folder" width="14" style="vertical-align: text-bottom"></i> AI/ML</span>
-                                <span style="color: #00aaff;">Active</span>
+                                <span style="color: #88a0c6;">Active</span>
                             </div>
                         </div>
 
@@ -150,20 +185,6 @@
             </main>
         </div>
     </div>
-
-
-
-
-    <!-- Contact CTA Section -->
-    <div class="section dark-section" style="margin-top: 60px;">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Want to work with Sarah?</h2>
-            <p style="margin-bottom: 30px; color: #ccc;">Reach out via email or connect on social media to discuss potential collaborations.</p>
-            <a href="#" class="btn-primary">Send a Message</a>
-        </div>
-    </div>
-
-
 
     <!-- Footer -->
     <footer class="footer">
